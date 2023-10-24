@@ -87,6 +87,8 @@ export default function AprysePage() {
             <a
               className="underline"
               href="https://docs.apryse.com/documentation/web/guides/watermarks/#draw-watermark-text-in-custom-positions"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation link (Watermark)
             </a>
@@ -95,6 +97,8 @@ export default function AprysePage() {
             <a
               className="underline"
               href="https://docs.apryse.com/documentation/web/guides/hiding-elements/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation link (Toolbar customization)
             </a>
@@ -103,6 +107,8 @@ export default function AprysePage() {
             <a
               className="underline"
               href="https://docs.apryse.com/documentation/web/guides/wv-server-deployment/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation link (WebViewer Server)
             </a>

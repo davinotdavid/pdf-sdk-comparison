@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PDF SDKs Comparison
+
+This repository aims to provide a minimal setup needed for rendering PDFs with multiple SDKs so that one can compare which one suits best.
 
 ## Getting Started
 
-First, run the development server:
+Running it locally:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone git@github.com:davinotdavid/pdf-sdk-comparison.git
+
+$ cd pdf-sdk-comparison
+
+$ npm install
+
+$ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Each of the following routes represents a different SDK vendor:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`/apryse` for [Apryse](https://apryse.com/products/webviewer)
 
-## Learn More
+`/pspdkfit` for [PSPDFKit](https://pspdfkit.com/)
 
-To learn more about Next.js, take a look at the following resources:
+`/cloudpdf` for [CloudPDF](https://cloudpdf.io/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Special notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Apryse (former PDFTron)
 
-## Deploy on Vercel
+- Using the client side only implementation (the one in this repo) [starting with version 10, there is not support for IE11 or older](https://docs.apryse.com/documentation/web/faq/webviewer-with-ie11/). They do provide a [legacy UI version](https://docs.apryse.com/documentation/web/faq/webviewer-with-ie9/) in case there's a need to support IE9+.
+- There is a [WebViewer Server](https://docs.apryse.com/documentation/web/faq/wvs/what-is-wvs/#should-i-use-webviewer-server-with-the-webviewer-client) component that can be optionally added for optimal performance (and potentially obfuscate the actual PDF file). This has not been tested / verified by me yet so can't say how easy of a solution it would be.
+- The PDF file itself can be easily seen in the Network tab and somewhat easily seen in the Elements tab (it shows up in the `iframe` as a encoded URL param).
+- It is easy to add watermarks through the [`setWatermark` API](https://docs.apryse.com/documentation/web/guides/watermarks/) and they persist when downloading the file. If the button is enabled, it is also possible for the user to add a custom watermark through the UI before printing (the UI is provided).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### PSPDFKit
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Very similar in functionality with PDFTron.
+- Using the client side only implementation (the one in this repo) it does a great job on obfuscating the actual pdf file as it cannot be easily seen in the Network tab nor in the Elements tab.
+- There is an optional [PSPDFKit Server](https://pspdfkit.com/guides/web/pspdfkit-server/get-started/) counterpart that helps with performance for large documents amongst [other features](https://pspdfkit.com/guides/web/pspdfkit-server/overview/).
+- Regarding watermarks, even though it is possible to draw using a Canvas2D through the `renderPageCallback` function, it does not provide a dedicated API for it. Also, even though it render the watermark correctly while printing [it doesn't actually add it to the PDF file itself while saving the file](https://pspdfkit.com/guides/web/features/watermarks/).
+
+### CloudPDF
+
+- A [cheap-ish](https://cloudpdf.io/pricing) hosted solution that provides some of the capabilities of the previous SDKs' Server solutions.
+- By default, since the actual PDFs files are stored in their own servers, it refers to the file through an ID and it communicates with the server to actually render it so there is no mention of the file in the Network tab nor the Elements tab.
+- Their dashboard provides a few toggle switches in terms of file visibility and user permissions. One of these toggles (set per file) allows/forbids its download.
+- Does not provide watermark functionality.

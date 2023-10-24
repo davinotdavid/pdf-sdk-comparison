@@ -78,6 +78,8 @@ export default function PSPDFKitPage() {
             <a
               className="underline"
               href="https://pspdfkit.com/guides/web/features/watermarks/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation link (Watermark)
             </a>
@@ -86,6 +88,8 @@ export default function PSPDFKitPage() {
             <a
               className="underline"
               href="https://pspdfkit.com/guides/web/samples/customized-pdf-toolbar/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation link (Toolbar customization)
             </a>
@@ -94,6 +98,8 @@ export default function PSPDFKitPage() {
             <a
               className="underline"
               href="https://pspdfkit.com/guides/web/pspdfkit-server/get-started/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation link (PSPDFKit Server)
             </a>
