@@ -38,8 +38,8 @@ Each of the following routes represents a different SDK vendor:
 ### PSPDFKit
 
 - Very similar in functionality with PDFTron.
-- Using the client side only implementation (the one in this repo) it does a great job on obfuscating the actual pdf file as it cannot be easily seen in the Network tab nor in the Elements tab.
-- There is an optional [PSPDFKit Server](https://pspdfkit.com/guides/web/pspdfkit-server/get-started/) counterpart that helps with performance for large documents amongst [other features](https://pspdfkit.com/guides/web/pspdfkit-server/overview/).
+- Using the client side only implementation (the one in this repo) the PDF file itself can be easily seen in the Network tab.
+- There is an optional [PSPDFKit Server](https://pspdfkit.com/guides/web/pspdfkit-server/get-started/) counterpart that helps with performance for large documents amongst [other features](https://pspdfkit.com/guides/web/pspdfkit-server/overview/) and helps with obfuscating the actual PDF file through document streaming.
 - Regarding watermarks, even though it is possible to draw using a Canvas2D through the `renderPageCallback` function, it does not provide a dedicated API for it. Also, even though it render the watermark correctly while printing [it doesn't actually add it to the PDF file itself while saving the file](https://pspdfkit.com/guides/web/features/watermarks/).
 
 ### CloudPDF
